@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="mahermo" uri="mahermoTags" %>
 <html>
 <head>
     <meta name="generator" content="Eclipse IDE">
@@ -14,6 +15,7 @@
         th { background-color: #f2f2f2; }
         .estado-activa { color: green; font-weight: bold; }
         .estado-cancelada { color: red; font-weight: bold; }
+        .estado-desconocido { color: orange; font-weight: bold; }
         .acciones a { margin-right: 10px; }
     </style>
 </head>
@@ -43,17 +45,13 @@
                 <td>${reserva.nombreEspacio}</td>
                 <td>${reserva.nombreUsuario}</td>
                 <td>
-                    <c:set var="fechaInicio" value="${reserva.fechaHoraInicio.toString()}" />
-                    <c:set var="fechaFormateada" value="${fechaInicio.substring(8,10)}/${fechaInicio.substring(5,7)}/${fechaInicio.substring(0,4)} ${fechaInicio.substring(11,16)}" />
-                    ${fechaFormateada}
+                    <mahermo:formatDate date="${reserva.fechaHoraInicio}" pattern="dd/MM/yyyy HH:mm" />
                 </td>
                 <td>
-                    <c:set var="fechaFin" value="${reserva.fechaHoraFin.toString()}" />
-                    <c:set var="fechaFinFormateada" value="${fechaFin.substring(8,10)}/${fechaFin.substring(5,7)}/${fechaFin.substring(0,4)} ${fechaFin.substring(11,16)}" />
-                    ${fechaFinFormateada}
+                    <mahermo:formatDate date="${reserva.fechaHoraFin}" pattern="dd/MM/yyyy HH:mm" />
                 </td>
                 <td>
-                    <span class="estado-${reserva.estado}">${reserva.estado}</span>
+                    <mahermo:reservaStatus estado="${reserva.estado}" showIcon="true" />
                 </td>
                 <td class="acciones">
                     <c:if test="${sessionScope.usuario.rol eq 'admin' or reserva.usuarioId eq sessionScope.usuario.id}">

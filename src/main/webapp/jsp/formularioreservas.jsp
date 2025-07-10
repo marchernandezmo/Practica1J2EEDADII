@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="mahermo" uri="mahermoTags" %>
 <html>
 <head>
     <meta name="generator" content="Eclipse IDE">
@@ -14,6 +15,9 @@
         input, select { padding: 8px; width: 300px; }
         .error { color: red; margin-bottom: 15px; }
         .info { color: blue; margin-bottom: 15px; }
+        .estado-activa { color: green; font-weight: bold; }
+        .estado-cancelada { color: red; font-weight: bold; }
+        .estado-desconocido { color: orange; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -65,6 +69,7 @@
                     <option value="activa" <c:if test="${reserva.estado eq 'activa'}">selected</c:if>>Activa</option>
                     <option value="cancelada" <c:if test="${reserva.estado eq 'cancelada'}">selected</c:if>>Cancelada</option>
                 </select>
+                <br/><small>Estado actual: <mahermo:reservaStatus estado="${reserva.estado}" showIcon="true" /></small>
             </div>
         </c:if>
         
