@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="https://jakarta.ee/xml/ns/jakartaee"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee 
+        https://jakarta.ee/xml/ns/jakartaee/web-jsptaglibrary_3_0.xsd"
+        version="3.0">
+    
+    <description>Etiquetas personalizadas de MaHerMo</description>
+    <display-name>Etiquetas personalizadas de MaHerMo</display-name>
+    <tlib-version>1.0</tlib-version>
+    <short-name>mahermo</short-name>
+    <uri>mahermoTags</uri>
+    
+    <!-- Etiqueta para formatear las fechas -->
+    <tag>
+        <description>Formatea las fechas LocalDateTime con el patrón especificado</description>
+        <name>formatDate</name>
+        <tag-class>edu.mahermo.tags.FormatDateTag</tag-class>
+        <body-content>empty</body-content>
+        
+        <attribute>
+            <description>La fecha LocalDateTime a formatear</description>
+            <name>date</name>
+            <required>true</required>
+            <!-- Especificamos Runtime Expression Value a true para que acepte tanto valores literales de tipo String como expresiones que se evalúan en tiempo de ejecución. Esto permite que el valor del atributo sea dinámico: -->
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.time.LocalDateTime</type>
+        </attribute>
+        
+        <attribute>
+            <description>Patrón de formato (dd/MM/yyyy HH:mm)</description>
+            <name>pattern</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+    </tag>
+    
+    <!-- Etiqueta para mostrar estado de reserva -->
+    <tag>
+        <description>Muestra el estado de una reserva con estilos los CSS apropiados</description>
+        <name>reservaStatus</name>
+        <tag-class>edu.mahermo.tags.ReservaStatusTag</tag-class>
+        <body-content>empty</body-content>
+        
+        <attribute>
+            <description>El estado de la reserva (activa o cancelada)</description>
+            <name>estado</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>java.lang.String</type>
+        </attribute>
+        
+        <attribute>
+            <description>Mostrar el icono junto al estado (por defecto, es true)</description>
+            <name>showIcon</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <type>boolean</type>
+        </attribute>
+    </tag>
+</taglib>
